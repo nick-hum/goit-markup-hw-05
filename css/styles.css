@@ -1,7 +1,5 @@
 /* styles for index.html */
 
-/* rgba(255, 255, 255, 0.6); футер */
-
 :root {
   --primary-text-color: #757575;
   --title-text-color: #212121;
@@ -80,6 +78,7 @@ img {
 
 .site-nav .link {
   display: block;
+  position: relative;
   padding-top: 32px;
   padding-bottom: 32px;
 
@@ -89,6 +88,19 @@ img {
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link.current::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-color);
 }
 
 .site-nav .item + .item {
@@ -127,6 +139,8 @@ img {
   font-style: normal;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* hero */
@@ -249,6 +263,7 @@ img {
 }
 
 .product-item {
+  position: relative;
   width: calc((100% - 60px) / 2);
 }
 
@@ -256,18 +271,33 @@ img {
   margin-right: 30px;
 }
 
-.section.sale {
-  padding-bottom: 94px;
-}
-
-.section .section-products {
+.product-text {
   margin-top: 0px;
   margin-bottom: 0px;
   color: #ffffff;
   font-size: 14px;
   line-height: 1.14;
   text-transform: uppercase;
-  background-color: #e5e5e5;
+}
+
+.product-thumb {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(82px, -27px);
+}
+
+.product-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
+.section.sale {
+  padding-bottom: 94px;
 }
 
 .section.team {
@@ -292,12 +322,17 @@ img {
 }
 
 .section .team-member {
-  margin-top: 30px;
+  padding-top: 30px;
+  margin-top: 0px;
   margin-bottom: 10px;
   color: var(--title-text-color);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.18;
+}
+
+.team-thumb {
+  background-color: #fff;
 }
 
 .job-type {
@@ -312,7 +347,7 @@ img {
   justify-content: space-between;
   padding-left: 32px;
   padding-right: 32px;
-  margin-bottom: 24px;
+  padding-bottom: 24px;
 }
 
 .social-item__link {
@@ -320,12 +355,14 @@ img {
   width: 44px;
   height: 44px;
   color: #afb1b8;
+  border-radius: 50%;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-item__link:hover,
 .social-item__link:focus {
   background-color: var(--accent-color);
-  border-radius: 50%;
   color: #ffffff;
 }
 
@@ -347,6 +384,7 @@ img {
   width: calc((100% - 150px) / 6);
   border: 1px solid #afb1b8;
   border-radius: 4px;
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .client-item:hover,
@@ -360,6 +398,7 @@ img {
   height: 90px;
 
   color: #afb1b8;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .client-link:hover,
@@ -424,6 +463,7 @@ img {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .join-item__link:hover,
@@ -509,6 +549,7 @@ img {
   line-height: 1.62;
   background-color: #f5f4fa;
   color: var(--title-text-color);
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button:hover,
@@ -526,11 +567,41 @@ img {
   text-decoration: none;
 }
 
-/* Цвет абзаца специально сделан не совсем белым */
+.flex-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.flex-thumb::before {
+  content: '';
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33, 150, 243, 0.9);
+  transform: translateY(100%);
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .projects .projects-text {
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin: 63px 24px;
   font-size: 18px;
   line-height: 1.55;
-  color: #e5e5e5;
+  color: #ffffff;
+  transform: translateY(100%);
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flex-item:hover .flex-thumb::before,
+.flex-item:focus .flex-thumb::before,
+.flex-item:focus .projects-text,
+.flex-item:hover .projects-text {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .projects .projects-title {
@@ -577,6 +648,7 @@ img {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   overflow: hidden;
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .flex-item:hover,
